@@ -23,17 +23,20 @@
 		<repository>
 			<id>github-utils</id>
 			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/samagra-comms/utils</url>
+			<!-- <url>https://maven.pkg.github.com/samagra-comms/utils</url> -->
+			<url>https://github.com/samagra-comms/utils</url>
 		</repository>
 		<repository>
 			<id>github-dao</id>
 			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/samagra-comms/dao</url>
+			<!--<url>https://maven.pkg.github.com/samagra-comms/dao</url> -->
+			<url>https://github.com/samagra-comms/dao</url>
 		</repository>
 		<repository>
 			<id>github-adapter</id>
 			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/samagra-comms/adapter</url>
+			<!-- <url>https://maven.pkg.github.com/samagra-comms/adapter</url>-->
+			<url>https://github.com/samagra-comms/adapter</url>
 		</repository>
 	</repositories>
 	<dependencies>
