@@ -5,6 +5,8 @@ import com.uci.adapter.cdn.FileCdnFactory;
 import com.uci.adapter.netcore.whatsapp.inbound.NetcoreMessageFormat;
 import com.uci.adapter.netcore.whatsapp.NetcoreWhatsappAdapter;
 import com.uci.adapter.cdn.service.SunbirdCloudMediaService;
+import com.uci.adapter.netcore.whatsapp.inbound.NetcoreWhatsAppMessage;
+import com.uci.adapter.netcore.whatsapp.inbound.TextType;
 import com.uci.adapter.utils.MediaSizeLimit;
 import com.uci.inbound.utils.XMsgProcessingUtil;
 import com.uci.dao.repository.XMessageRepository;
@@ -73,10 +75,17 @@ public class NetcoreWhatsappConverter {
                 .mediaSizeLimit(mediaSizeLimit)
                 .build();
         try {
+            NetcoreWhatsAppMessage netcoreWhatsAppMessage = message.getMessages()[0];
+            TextType textType = netcoreWhatsAppMessage.getText();
+            if(textType!=null && textType.getText()!=null && textType.getText().trim().equalsIgnoreCase("hi")){
+                textType.setText("Hi");
+                netcoreWhatsAppMessage.setText(textType);
+                log.info("Openforge #135229 Handle all possible cases only for Hi, HI, hI, hi "+netcoreWhatsAppMessage);
+            }
             XMsgProcessingUtil.builder()
                     .adapter(netcoreWhatsappAdapter)
                     .xMsgRepo(xmsgRepo)
-                    .inboundMessage(message.getMessages()[0])
+                    .inboundMessage(netcoreWhatsAppMessage)
                     .topicFailure(inboundError)
                     .topicSuccess(inboundProcessed)
                     .kafkaProducer(kafkaProducer)
